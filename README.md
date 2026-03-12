@@ -43,7 +43,7 @@ cp .env.example .env
 Edit `.env` and set at least:
 
 - `TARGET_WALLET` — Polymarket wallet address to copy (`0x...`)
-- `PRIVATE_KEY` — Your wallet private key (`0x...`)
+- `WALLET_PRIVATE_KEY` — Your wallet private key (`0x...`)
 - `RPC_URL` — Polygon RPC URL (e.g. QuickNode)
 
 For a small demo, use modest sizing (e.g. `MAX_TRADE_SIZE=5`, `POSITION_MULTIPLIER=0.1`).
@@ -77,7 +77,7 @@ The main loop: detect trade → (if BUY) subscribe WS if needed → compute copy
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `TARGET_WALLET` | Yes | Polymarket wallet address to copy (e.g. `0x...`). |
-| `PRIVATE_KEY` | Yes | Your wallet private key (0x-prefixed). |
+| `WALLET_PRIVATE_KEY` | Yes | Your wallet private key (0x-prefixed). |
 | `RPC_URL` | Yes | Polygon RPC URL (e.g. QuickNode). |
 | `SIG_TYPE` | No | Polymarket signature type. `0` = EOA (default), `1` = Poly Proxy, `2` = Poly Polymorphic. |
 | `PROXY_WALLET_ADDRESS` | For 1/2 | Funder/proxy/safe address when using `SIG_TYPE=1` or `2`. Leave empty for EOA. |
@@ -102,7 +102,7 @@ The main loop: detect trade → (if BUY) subscribe WS if needed → compute copy
 ## Auth (SIG_TYPE and PROXY_WALLET_ADDRESS)
 
 - **SIG_TYPE=0 (EOA)**  
-  Default. Your signer is an EOA. Do not set `PROXY_WALLET_ADDRESS`. API credentials are derived or created from `PRIVATE_KEY` at startup.
+  Default. Your signer is an EOA. Do not set `PROXY_WALLET_ADDRESS`. API credentials are derived or created from `WALLET_PRIVATE_KEY` at startup.
 
 - **SIG_TYPE=1 (Poly Proxy)**  
   Set `PROXY_WALLET_ADDRESS` to your Polymarket proxy/safe address (funder).
