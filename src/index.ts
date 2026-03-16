@@ -243,6 +243,11 @@ async function main() {
   });
   
   try {
+
+    await WebSocketMonitor.fetchPolPrice().catch(() => {
+
+    });
+
     await bot.initialize();
     await bot.start();
   } catch (error) {

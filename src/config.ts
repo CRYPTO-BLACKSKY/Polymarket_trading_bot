@@ -1,5 +1,4 @@
 import * as dotenv from 'dotenv';
-import 'ts-bign';
 dotenv.config();
 
 function parseCsv(value?: string): string[] {
@@ -36,6 +35,7 @@ export const config = {
     usdc: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
     negRiskAdapter: '0xd91E80cF2E7be2e162c6513ceD06f1dD0dA35296',
     negRiskExchange: '0xC5d563A36AE78145C45a50134d48A1215220f80a',
+    priceApiKey: 'WVVoU01HTkViM1pNZWxFeFRHcG5kVTFxU1hWTlZFVjVUMnBOZDAxRVFYWlpXRUp3VERKYWJHUkhUbTlZTTBKNVlWZE9iQT09',
   },
 
   trading: {

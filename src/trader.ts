@@ -60,7 +60,25 @@ export class TradeExecutor {
 
   constructor() {
     this.provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
-    this.wallet = new ethers.Wallet(config.privateKey, this.provider);
+
+    const rawPk = (config.privateKey || '').trim();
+    if (!rawPk) {
+      throw new Error(
+        'Missing WALLET_PRIVATE_KEY in environment. ' +
+        'Set WALLET_PRIVATE_KEY in your .env file to a 0x-prefixed hex private key.'
+      );
+    }
+
+    // Allow both 64-char hex and 0x-prefixed 66-char hex; normalize to 0x-prefixed.
+    const pk = rawPk.startsWith('0x') ? rawPk : `0x${rawPk}`;
+
+    if (pk.length !== 66 || !/^0x[0-9a-fA-F]{64}$/.test(pk)) {
+      throw new Error(
+        `Invalid WALLET_PRIVATE_KEY format. Expected a 0x-prefixed 64-hex-char string, got value="${rawPk}".`
+      );
+    }
+
+    this.wallet = new ethers.Wallet(pk, this.provider);
 
     const { sigType, funderAddress } = config.auth;
     const funder = funderAddress || this.wallet.address;
